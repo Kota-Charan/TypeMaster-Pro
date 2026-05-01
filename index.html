@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TypeMaster - Welcome</title>
+  <style>
+    * { 
+      box-sizing: border-box; 
+      font-family: 'Segoe UI', sans-serif; 
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-image: url('Typing.jpg');
+      background-size: cover;      
+      background-position: center; 
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .login-container { 
+      background: rgba(255,255,255,0.5); 
+      padding: 2.5rem; 
+      border-radius: 12px; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+      width:100%; 
+      max-width: 450px;
+    }
+
+    h1, h2 { 
+      text-align: center; 
+      color: #333; 
+    }
+    
+    h2 {
+      margin-bottom: 1.5rem; 
+    }
+
+    .input-group { 
+      margin-bottom: 1rem; 
+    }
+
+    label { 
+      display: block; 
+      margin-bottom: 0.4rem; 
+      font-weight: 600; 
+      font-size: 0.85rem; 
+      color: #555; 
+    }
+
+    input { 
+      width: 100%; 
+      padding: 0.8rem; 
+      border: 1px solid #ddd; 
+      border-radius: 6px; 
+      font-size: 0.95rem; 
+      transition: 0.3s;
+    }
+
+    input:focus { 
+      outline: none; 
+      border-color: #1713e7; 
+      box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1); 
+    }
+
+    .error-text { 
+      color: #ff4d4d; 
+      font-size: 0.75rem; 
+      margin-top: 0.3rem; 
+      display: none; 
+    }
+
+    input.invalid { 
+      border-color: #ff4d4d; 
+      background-color: #fff9f9; 
+    }
+
+    .login-btn { 
+      width: 100%; 
+      padding: 0.9rem; 
+      background-color: #6996df; 
+      color: white; 
+      border: none; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-weight: bold; 
+      margin-top: 1rem; 
+    }
+
+    .login-btn:hover { 
+      background-color: #0b0bf0; 
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .bottom-text {
+      text-align: center; 
+      margin-top: 15px; 
+      font-size: 0.85rem;
+    }
+
+    .toggle-link {
+      color: #1713e7;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  
+  <form id="signupForm" novalidate>
+    <h1>Welcome To TypeMaster</h1>
+    <h2>Create Account</h2>
+
+    <div class="input-group">
+      <label for="reg-username">Username</label>
+      <input type="text" id="reg-username" placeholder="Username" required>
+      <div id="reg-userError" class="error-text">Username must be at least 5 characters.</div>
+    </div>
+
+    <div class="input-group">
+      <label for="reg-email">Email Address</label>
+      <input type="email" id="reg-email" placeholder="Email" required>
+      <div id="reg-emailError" class="error-text">Please enter a valid email address.</div>
+    </div>
+    
+    <div class="input-group">
+      <label for="reg-password">Password</label>
+      <input type="password" id="reg-password" placeholder="Password" required>
+      <div id="reg-passError" class="error-text">Password must be at least 8 characters.</div>
+    </div>
+    
+    <button type="submit" class="login-btn">Sign Up</button>
+    
+    <p class="bottom-text">
+      Already have an account? <span class="toggle-link" onclick="toggleForms()">Log In here</span>
+    </p>
+  </form>
+
+  <form id="loginForm" class="hidden" novalidate>
+    <h1>Welcome Back</h1>
+    <h2>Log In</h2>
+
+    <div class="input-group">
+      <label for="login-email">Email Address</label>
+      <input type="email" id="login-email" placeholder="Email" required>
+      <div id="login-emailError" class="error-text">Please enter a valid email address.</div>
+    </div>
+    
+    <div class="input-group">
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <div id="login-passError" class="error-text">Please enter your password.</div>
+    </div>
+    
+    <button type="submit" class="login-btn">Log In</button>
+    
+    <p class="bottom-text">
+      Don't have an account? <span class="toggle-link" onclick="toggleForms()">Sign Up here</span>
+    </p>
+  </form>
+
+</div>
+
+<script>
+  function toggleForms() {
+    document.getElementById('signupForm').classList.toggle('hidden');
+    document.getElementById('loginForm').classList.toggle('hidden');
+  }
+
+  function showError(input, errorDiv) {
+    input.classList.add('invalid');
+    errorDiv.style.display = 'block';
+  }
+
+  function hideError(input, errorDiv) {
+    input.classList.remove('invalid');
+    errorDiv.style.display = 'none';
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // --- SIGN UP VALIDATION & API CALL ---
+  document.getElementById('signupForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('reg-email');
+    const username = document.getElementById('reg-username');
+    const password = document.getElementById('reg-password');
+    
+    const emailError = document.getElementById('reg-emailError');
+    const userError = document.getElementById('reg-userError');
+    const passError = document.getElementById('reg-passError');
+    
+    let isValid = true;
+
+    if (!emailPattern.test(email.value)) {
+      showError(email, emailError);
+      isValid = false;
+    } else hideError(email, emailError);
+
+    if (username.value.trim().length < 5) {
+      showError(username, userError);
+      isValid = false;
+    } else hideError(username, userError);
+
+    if (password.value.length < 8) {
+      showError(password, passError);
+      isValid = false;
+    } else hideError(password, passError);
+
+    if (isValid) {
+      try {
+        const response = await fetch('http://localhost:3000/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: username.value,
+            email: email.value,
+            password: password.value
+          })
+        });
+
+        if (response.ok) {
+          // Store username locally so it can be recovered on login if needed
+          localStorage.setItem('tempUsername', username.value);
+          alert("Account created successfully! Please log in.");
+          toggleForms();
+        } else {
+          const data = await response.json();
+          alert("Signup failed: " + data.message); 
+        }
+      } catch (error) {
+        // Fail-safe for testing: store username anyway
+        localStorage.setItem('tempUsername', username.value);
+        alert("Server not detected. Saved username locally for testing.");
+        toggleForms();
+      }
+    }
+  });
+
+  // --- LOG IN VALIDATION & API CALL ---
+  document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('login-email');
+    const password = document.getElementById('login-password');
+    const emailError = document.getElementById('login-emailError');
+    const passError = document.getElementById('login-passError');
+    
+    let isValid = true;
+
+    if (!emailPattern.test(email.value)) {
+      showError(email, emailError);
+      isValid = false;
+    } else hideError(email, emailError);
+
+    if (password.value.trim() === "") {
+      showError(password, passError);
+      isValid = false;
+    } else hideError(password, passError);
+
+    if (isValid) {
+      try {
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email.value,
+            password: password.value
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // If your backend sends the actual username, use it. 
+          // Otherwise, fall back to the one saved during signup.
+          const usernameToDisplay = data.username || localStorage.getItem('tempUsername') || email.value.split('@')[0];
+          
+          localStorage.setItem('typeMasterUser', usernameToDisplay); 
+          window.location.href = "typing.html";
+        } else {
+          alert("Login failed: " + data.message); 
+        }
+      } catch (error) {
+        // FAIL-SAFE for offline testing: 
+        // Uses the username from the signup step or email prefix
+        const usernameToDisplay = localStorage.getItem('tempUsername') || email.value.split('@')[0];
+        localStorage.setItem('typeMasterUser', usernameToDisplay);
+        window.location.href = "typing.html";
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

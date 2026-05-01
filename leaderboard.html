@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeMaster - Leaderboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="nav-frame">
+    <h2 class="accent">TypeMaster Pro</h2>
+    <a href="typing.html">Start Typing</a>
+    <a href="leaderboard.html" class="active">Leaderboard</a> <a href="profile.html">My Profile</a>
+    <a href="index.html" id="logoutLink" style="margin-top: auto;">Logout</a>
+</div>
+
+        <header>
+            <h1>Global <span class="accent">Rankings</span></h1>
+        </header>
+        
+        <main>
+            <div class="stats-bar">
+                <div class="stat-item">Top Speed: <span id="top-wpm-ever">0</span> WPM</div>
+            </div>
+
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>WPM</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-data">
+                    <tr>
+                        <td>1</td>
+                        <td>CodeMaster_99</td>
+                        <td>112</td>
+                        <td>Hard</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Engineering_Pro</td>
+                        <td>95</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>TypingWizard</td>
+                        <td>88</td>
+                        <td>Hard</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="session-controls" style="margin-top: 25px;">
+                <button id="startBtn" onclick="window.location.href='typing.html'">New Session</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Future Logic: Fetch real scores from your Node/Express backend
+        async function loadLeaderboard() {
+            try {
+                // const response = await fetch('http://localhost:3000/scores');
+                // const scores = await response.json();
+                // Logic to map scores to the table rows goes here
+            } catch (error) {
+                console.log("Connect your backend to see live scores!");
+            }
+        }
+        window.onload = loadLeaderboard;
+    </script>
+</body>
+</html>

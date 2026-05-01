@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeMaster - My Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-frame">
+    <h2 class="accent">TypeMaster Pro</h2>
+    <a href="typing.html">Start Typing</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="profile.html" class="active">My Profile</a> <a href="index.html" id="logoutLink" style="margin-top: auto;">Logout</a>
+</div>
+
+    <div class="content-frame">
+    <h1>User <span class="accent">Profile</span></h1>
+    
+    <div class="stat-card" style="width: 100%; max-width: 500px; text-align: center;">
+        <p>Welcome back,</p>
+        <h2 id="prof-username" class="accent">Loading...</h2>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card"><h3>Avg WPM</h3><p>65</p></div>
+        <div class="stat-card"><h3>Top WPM</h3><p>82</p></div>
+        <div class="stat-card"><h3>Tests</h3><p>24</p></div>
+    </div>
+    <div class="stat-card" style="width: 100%; max-width: 500px; text-align: center;">
+    <p>Welcome back,</p>
+    <h2 id="prof-username" class="accent">...</h2> <!-- Changed from EngineerDev to ... -->
+</div>
+</div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const savedName = localStorage.getItem('typeMasterUser');
+    const userDisplay = document.getElementById('prof-username');
+
+    console.log("Storage check:", savedName); // Look for this in the F12 console
+
+    if (savedName && userDisplay) {
+        userDisplay.innerText = savedName;
+    } else if (userDisplay) {
+        userDisplay.innerText = "Guest User";
+    }
+});
+</script>
+</body>
+</html>

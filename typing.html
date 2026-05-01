@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeMaster Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="nav-frame">
+    <h2 class="accent">TypeMaster Pro</h2>
+    <a href="typing.html" class="active">Start Typing</a> <a href="leaderboard.html">Leaderboard</a>
+    <a href="profile.html">My Profile</a>
+    <a href="index.html" id="logoutLink" style="margin-top: auto;">Logout</a>
+</div>
+
+    <div class="content-frame">
+        <div class="game-container">
+            <header>
+                <div class="stats-bar">
+                    <div class="stat-item">Level: <span id="level-name">Beginner</span></div>
+                    <div class="stat-item">Time: <span id="timer">0</span>s</div>
+                    <div class="stat-item">WPM: <span id="wpm">0</span></div>
+                </div>
+            </header>
+            
+            <main>
+                <div id="display-area" class="display-box">Select Level & Press Start</div>
+                <input type="text" id="input-field" placeholder="Ready..." disabled autocomplete="off" spellcheck="false">
+                
+                <div class="controls-area">
+                    <select id="level-select">
+                        <option value="easy">Level 1: Single Letters</option>
+                        <option value="medium">Level 2: Common Words</option>
+                        <option value="hard">Level 3: Full Sentences</option>
+                    </select>
+                    <div class="session-controls">
+                        <button id="startBtn">Start Session</button>
+                        <button id="endBtn" disabled>End Session</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
